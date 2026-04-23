@@ -1,0 +1,6 @@
+CWE: CWE-264
+CVE: CVE-2011-4112
+Project: torvalds@linux/550fd08c2cebad61c548def135f67aba284c6162
+
+--- Ground Truth Fix ---
+ priv_flags &= ~ ( IFF_XMIT_DST_RELEASE | IFF_TX_SKB_SHARING )  ; random_ether_addr (

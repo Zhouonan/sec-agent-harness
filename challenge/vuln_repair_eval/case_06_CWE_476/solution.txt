@@ -1,0 +1,6 @@
+CWE: CWE-476
+CVE: CVE-2018-15855
+Project: xkbcommon@libxkbcommon/917636b1d0d70205a13f89062b95e3a0fc31d4ff
+
+--- Ground Truth Fix ---
+ LAST_KEYMAP_FILE_TYPE ) { if ( file -> file_type == FILE_TYPE_GEOMETRY ) { log_vrb ( ctx , 1 , "Geometry<S2SV_blank>sections<S2SV_blank>are<S2SV_blank>not<S2SV_blank>supported;<S2SV_blank>ignoring\\n" ) ; } else {  ) ) ; }

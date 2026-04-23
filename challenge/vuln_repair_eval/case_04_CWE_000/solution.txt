@@ -1,0 +1,6 @@
+CWE: CWE-000
+CVE: CVE-2016-4817
+Project: h2o@h2o/1c0808d580da09fdec5a9a74ff09e103ea058dd4
+
+--- Ground Truth Fix ---
+ <S2SV_null> <S2SV_null> static int  parse_input ( h2o_http2_conn_t  ) ; } return  ( conn )  ; } h2o_buffer_consume  ) ; return 0  sock ) ; return 0 ;

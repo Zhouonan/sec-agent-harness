@@ -1,0 +1,6 @@
+CWE: CWE-200
+CVE: CVE-2017-9993
+Project: FFmpeg@FFmpeg/189ff4219644532bdfa7bab28dfedaee4d6d4021
+
+--- Ground Truth Fix ---
+ ; if (  av_strstart ( proto_name  ( proto_name , "file" , NULL ) ) { if ( strcmp ( c -> allowed_extensions , "ALL" ) && ! av_match_ext ( url , c -> allowed_extensions ) ) { av_log ( s , AV_LOG_ERROR , "Filename<S2SV_blank>extension<S2SV_blank>of<S2SV_blank>\\\'%s\\\'<S2SV_blank>is<S2SV_blank>not<S2SV_blank>a<S2SV_blank>common<S2SV_blank>multimedia<S2SV_blank>extension,<S2SV_blank>blocked<S2SV_blank>for<S2SV_blank>security<S2SV_blank>reasons.\\n" "If<S2SV_blank>you<S2SV_blank>wish<S2SV_blank>to<S2SV_blank>override<S2SV_blank>this<S2SV_blank>adjust<S2SV_blank>allowed_extensions,<S2SV_blank>you<S2SV_blank>can<S2SV_blank>set<S2SV_blank>it<S2SV_blank>to<S2SV_blank>\\\'ALL\\\'<S2SV_blank>to<S2SV_blank>allow<S2SV_blank>all\\n" , url ) ; return AVERROR_INVALIDDATA ; } } else if ( av_strstart ( proto_name ,  , NULL ) ) { ; } else  return AVERROR_INVALIDDATA ;

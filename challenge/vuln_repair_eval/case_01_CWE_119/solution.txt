@@ -1,0 +1,6 @@
+CWE: CWE-119
+CVE: CVE-2016-1621
+Project: external@libvpx/5a9753fca56f0eeb9f61e342b2fccffc364f9426
+
+--- Ground Truth Fix ---
+ dst . y_stride  ) ; }  dst . y_stride  ) ; }  dst . y_stride  ) ; near_sad  dst . y_stride  ) ; near_sad  dst . y_stride  ) ; }  16 , pre_y_stride  ) ; if  16 , pre_y_stride  ) ; near_sad  pre_y_buffer , pre_y_stride  ) ; if  16 , pre_y_stride  ) ; if  16 , pre_y_stride  ) ; }

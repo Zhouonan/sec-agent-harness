@@ -1,0 +1,6 @@
+CWE: CWE-20
+CVE: CVE-2013-1798
+Project: torvalds@linux/a2c118bfab8bc6b8bb213abfc35201e441693d55
+
+--- Ground Truth Fix ---
+ u64 redir_content ; if  ( redir_index <  < IOAPIC_NUM_PINS )  redir_content = ioapic  ] . bits ; else redir_content = ~ 0ULL

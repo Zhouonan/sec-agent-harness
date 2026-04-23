@@ -1,0 +1,35 @@
+# 使用 Ubuntu 22.04 作为基础，提供丰富的库支持
+FROM ubuntu:22.04
+
+# 避免交互式安装提示
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 更新并安装安全评测中常用的 C 语言开发库
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc-11 \
+    g++-11 \
+    make \
+    cmake \
+    pkg-config \
+    zlib1g-dev \
+    libssl-dev \
+    libtiff-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libxkbcommon-dev \
+    python3 \
+    python3-pip \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# 设置默认编译器为 GCC 11
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+
+# 创建工作目录
+WORKDIR /workspace
+
+# 验证安装
+RUN gcc --version && make --version

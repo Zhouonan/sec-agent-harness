@@ -1,0 +1,6 @@
+CWE: CWE-787
+CVE: CVE-2016-9533
+Project: vadz@libtiff/83a4b92815ea04969d494416eaae3d4c6b338e4a
+
+--- Ground Truth Fix ---
+ tif_rawcc ) ) { tif -> tif_rawcc = 0 ; tif -> tif_rawcp = tif -> tif_rawdata ;  0 ) ; }

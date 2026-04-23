@@ -1,0 +1,6 @@
+CWE: CWE-190
+CVE: CVE-2014-4655
+Project: torvalds@linux/82262a46627bebb0febcc26664746c25cef08563
+
+--- Ground Truth Fix ---
+ ; if ( info -> count < 1 ) return - EINVAL ; access = info -> access == 0 ? SNDRV_CTL_ELEM_ACCESS_READWRITE : ( info -> access & ( SNDRV_CTL_ELEM_ACCESS_READWRITE | SNDRV_CTL_ELEM_ACCESS_INACTIVE | SNDRV_CTL_ELEM_ACCESS_TLV_READWRITE ) ) ; info -> id . numid = 0 ; memset ( & kctl , 0 , sizeof ( kctl ) ) ; if ( replace ) { err = snd_ctl_remove_user_ctl ( file , & info -> id ) ; if ( err ) return err ; } if (  card -> user_ctl_count  return - ENOMEM  ; memcpy (

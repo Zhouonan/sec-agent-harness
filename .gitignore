@@ -1,0 +1,13 @@
+.env
+kimi_api_key
+logs/
+AGENT_ACTIVITY_LOG.md
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+dist/
+build/
+*.log

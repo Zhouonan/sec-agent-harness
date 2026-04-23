@@ -1,0 +1,16 @@
+# API Configuration
+api:
+  model: "kimi-k2.5"
+  base_url: "https://api.moonshot.cn/v1"
+  # You can also set MOONSHOT_API_KEY in your .env file
+  # api_key: "your-api-key-here"
+
+# Loop & FSM behavior
+loop:
+  max_turns_per_state: 30
+  total_max_turns: 40
+
+# Sandbox Configuration
+sandbox:
+  image: "gcc:11"
+  timeout: 60

@@ -1,0 +1,6 @@
+CWE: CWE-416
+CVE: CVE-2017-18218
+Project: torvalds@linux/27463ad99f738ed93c7c8b3e2e5bc8c4853a2ff2
+
+--- Ground Truth Fix ---
+ <S2SV_null> <S2SV_null> <S2SV_null> netdev_tx_t  hns_nic_net_xmit_hw ( struct  len ) ; netif_trans_update ( ndev ) ; ndev -> stats . tx_bytes += skb -> len ; ndev -> stats . tx_packets ++ ;

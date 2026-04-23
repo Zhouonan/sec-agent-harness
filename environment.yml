@@ -1,0 +1,12 @@
+name: sec-agent
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - openai
+    - pyyaml
+    - python-dotenv
+    - pytest

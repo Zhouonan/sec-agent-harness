@@ -1,0 +1,10 @@
+分析 challenge/ 目录下的代码，找出其中的安全漏洞，并通过运行其 tests/ 目录下的测试用例来验证你的发现。在验证成功后，请修复这个漏洞，并再次运行测试确保修复成功且未破坏原有功能。
+
+我现在在开发这个项目@agent/sec-agent-harness/README.md ，请你遵照@agent/sec-agent-harness/docs/agent-guide/ ，进行hook模块的开发，这里有一个参考@agent/learn-claude-code/docs/en/s08-hook-system.md ,请你广泛搜集相关资料，来做一个开发前的准备工作，生成一个完备的文档，文档需要有模块功能介绍，多个技术选型，优劣分析，与现有系统的适配度分析，开发阶段规划等 
+
+我现在在开发这个项目@agent/sec-agent-harness/README.md ，请你遵照@agent/sec-agent-harness/docs/agent-guide/ 进行之后的工作；
+现在你的任务是：
+检查system prompt的构建并且整理出一个汇报文档，放在docs/teaching文件夹下。
+同时，这里有两个个参考文档你可以看看有没有什么差别
+    @agent/learn-claude-code/docs/zh/s10-system-prompt.md
+    @agent/learn-claude-code/docs/zh/s10a-message-prompt-pipeline.md
