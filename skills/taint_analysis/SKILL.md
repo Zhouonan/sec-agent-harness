@@ -1,9 +1,9 @@
 ---
 name: taint-analysis
-description: Perform data-flow and taint analysis on the codebase to identify potential vulnerabilities.
+description: Perform data-flow and taint analysis. Contains guidelines for tools 'analyze_path_codeql' and 'analyze_path_semgrep'.
 tools:
   - name: analyze_path_codeql
-    description: Performs deep, whole-program semantic analysis using GitHub CodeQL. Preferred for accurate vulnerability verification.
+    description: Performs deep, whole-program semantic analysis using GitHub CodeQL. Preferred for accurate vulnerability verification. Try it first if the environment supports it.
     parameters:
       type: object
       properties:

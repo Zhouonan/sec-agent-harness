@@ -7,8 +7,8 @@ api:
 
 # Loop & FSM behavior
 loop:
-  max_turns_per_state: 30
-  total_max_turns: 40
+  max_turns_per_state: 60
+  total_max_turns: 100
 
 # Sandbox Configuration
 sandbox:

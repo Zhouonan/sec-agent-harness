@@ -1,0 +1,11 @@
+{
+    "timestamp": "2026-05-07T20:18:56.658697",
+    "total_cases": 1,
+    "cases": [
+        {
+            "case_name": "case_02_CWE_125",
+            "error": "Error code: 400 - {'error': {'message': 'Invalid request: tool_call_id  is not found', 'type': 'invalid_request_error'}}",
+            "status": "CRASHED"
+        }
+    ]
+}

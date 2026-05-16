@@ -50,8 +50,13 @@
 
 ### 我们的实现 vs 原仓库
 - **原仓库**: 定期进行文本总结 (Summarization)。
-- **Sec-Agent (重大改进)**: 我们引入了 **黑板机制 (Blackboard)**。
-    - **核心区别**: 我们不只是总结文本。在 `core/loop.py` 中，`blackboard` 是一个持久化的字典。
+    - **黑板的组成部分 (Blackboard Components)**：在我们的 `loop.py` 中，黑板不是一坨乱糟糟的文本，它是一个结构化的字典，主要包含四大核心资产：
+        1. **动态任务规划树 (`plan`)**：这不是一段随意的纯文本，而是一个结构化列表（List）。在 `core/loop.py` 中，它具备两个极其重要的工程特性：
+           * **动态渲染**：系统每次会通过特定的引擎（如 `render_plan(plan)`）将其转化为带复选框的 Markdown 附在系统提示词里，让 Agent 始终拥有清晰的“上帝视角”。
+           * **看门狗防迷失机制 (`rounds_since_todo_update`)**：这是我们针对长程任务容易“钻牛角尖”做出的关键设计。如果系统检测到 Agent 连续 5 轮对话都在埋头干活而没有去更新黑板上的 `plan`（标记完成或新增步骤），系统会偷偷在消息流中注入一条 ` <reminder>Refresh your plan before continuing...</reminder>`。这个硬控机制能强行把快要迷失的大模型拉回全局视角重新规划。
+        2. **跨状态摘要 (`<state>_summary`)**：例如从 `ANALYSIS` 切到 `VALIDATOR` 时，系统自动清空聊天记录，只将分析出的“漏洞路径与利用方式”总结成 Summary 挂在黑板上带到下一个状态。
+        3. **状态校验信息 (`last_test_status`, `last_test_exit_code`)**：沙箱（Sandbox）最新执行返回的成功与否状态。这是拦截 Agent 随意结束任务的“硬通货”（见 builtin_logic hook）。
+        4. **运行时技能副本 (`loaded_skill_*`)**：Agent 决定使用的临时指南，随用随存。
     - **逻辑**: 状态跳转（如从 `分析` 到 `验证`）时，我们强行清空 `messages` 历史（除了最核心的指令），只保留 `blackboard` 里的结构化数据（如漏洞的路径、变量名）。
     - **效果**: 这比简单的文本总结更精准，能让 Token 消耗降低 60% 以上，同时保证“验证状态”的智能体拥有完美的“信噪比”。
 

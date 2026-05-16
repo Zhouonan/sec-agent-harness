@@ -8,6 +8,7 @@ class HookEvent(Enum):
     SESSION_START = auto()
     PRE_TOOL_USE = auto()
     POST_TOOL_USE = auto()
+    SESSION_END = auto()
 
 @dataclass
 class HookResult:

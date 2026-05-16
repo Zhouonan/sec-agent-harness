@@ -1,0 +1,6 @@
+CWE: CWE-125
+CVE: CVE-2017-8294
+Project: VirusTotal@yara/83d799804648c2a0895d40a19835d9b757c6fa4e
+
+--- Ground Truth Fix ---
+ offset , offset ,  flags , NULL  offset , offset ,  flags , NULL  , data + offset , data_size -

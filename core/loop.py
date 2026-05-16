@@ -42,6 +42,8 @@ class LoopState:
     total_max_turns: int = settings.loop.total_max_turns
     stop_reason: Optional[str] = None
     session_id: str = field(default_factory=lambda: time.strftime("%Y%m%d_%H%M%S"))
+    state_path: List[str] = field(default_factory=list)
+    turn_log: List[Dict[str, Any]] = field(default_factory=list)
 
 class AgentLoop:
     def __init__(self, workspace_path: str = ".", model: str = None, api_key: str = None, base_url: str = None):
@@ -87,7 +89,7 @@ class AgentLoop:
                 "1. START by exploring the directory structure using 'list_files'. "
                 "2. MANDATORY: Identify the project's test directory structure (e.g., /tests, /challenge/tests) to ensure PoCs and regression tests are placed and executed correctly. "
                 "3. Read key files to understand the project logic. "
-                "4. Use 'scan_python_file' for deep AST analysis. "
+                "4. Use the available specialized skills (check the skill catalog below) for deep code structure analysis or taint tracking. "
                 "5. When you have a clear hypothesis about a vulnerability and a plan to verify it, transition to VALIDATOR state."
             ),
             AgentState.VALIDATOR: (
@@ -269,6 +271,14 @@ class AgentLoop:
             state.current_state = target_state
             state.state_turn_count = 0
             state.blackboard[f"{old_state_name}_summary"] = summary
+            state.state_path.append(target_state.name)
+            
+            # Context Compaction: clear chat history to prevent context window bloat
+            if len(state.messages) > 1:
+                # Keep the initial user task prompt and the latest assistant message (which contains the tool_calls)
+                # to prevent "tool_call_id not found" API errors.
+                state.messages = [state.messages[0], state.messages[-1]]
+
             return f"Successfully transitioned to {target_state.name}."
         except KeyError:
             return f"Error: Invalid state {next_state}."
@@ -426,7 +436,8 @@ class AgentLoop:
             
             if handler:
                 self._log_debug(f"[{state.current_state.name}] Tool Call: {name} with args {args}")
-                
+                tool_start = time.time()
+
                 # --- [Hook] PreToolUse ---
                 pre_result = registry.dispatch(HookEvent.PRE_TOOL_USE, state, tool_name=name, args=args)
                 if not pre_result.continue_execution:
@@ -486,6 +497,13 @@ class AgentLoop:
                         res_str = str(result)
                         summary = f"{res_str[:200]}... (Total {len(res_str)} chars)" if len(res_str) > 200 else res_str
                         self._log_debug(f"[{state.current_state.name}] Tool Output Summary ({name}):\n{summary}\n")
+                    state.turn_log.append({
+                        "turn": state.turn_count,
+                        "state": state.current_state.name,
+                        "tool": name,
+                        "success": True,
+                        "duration_ms": round((time.time() - tool_start) * 1000, 1)
+                    })
                 except Exception as e:
                     err_msg = f"Error executing tool: {str(e)}"
                     state.messages.append({
@@ -495,6 +513,14 @@ class AgentLoop:
                         "content": err_msg
                     })
                     self._log_debug(f"[{state.current_state.name}] Tool Execution ERROR:\n{err_msg}\n")
+                    state.turn_log.append({
+                        "turn": state.turn_count,
+                        "state": state.current_state.name,
+                        "tool": name,
+                        "success": False,
+                        "duration_ms": round((time.time() - tool_start) * 1000, 1),
+                        "error": str(e)
+                    })
             else:
                 err_msg = f"Error: Tool {name} not found."
                 state.messages.append({
@@ -504,6 +530,14 @@ class AgentLoop:
                     "content": err_msg
                 })
                 self._log_debug(err_msg)
+                state.turn_log.append({
+                    "turn": state.turn_count,
+                    "state": state.current_state.name,
+                    "tool": name,
+                    "success": False,
+                    "duration_ms": 0,
+                    "error": f"Tool {name} not found"
+                })
         
         return True
 
@@ -532,6 +566,9 @@ class AgentLoop:
             if state.current_state in (AgentState.DONE, AgentState.ERROR):
                 break
                 
+        # --- [Hook] SessionEnd ---
+        registry.dispatch(HookEvent.SESSION_END, state)
+
         self._log_debug(f"Finished. Final State: {state.current_state.name}")
         self._log_debug(f"Full log archived at: {self.log_file}")
         return state

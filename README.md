@@ -15,13 +15,22 @@ Sec-Agent-Harness is designed to solve the challenges of LLMs getting "lost" in 
 All project documentation is organized within the `docs/` directory:
 
 ### 📖 For Users & Contributors
-- **[Development Guide](docs/agent-guide/DEVELOPMENT_GUIDE.md)**: Guidelines for contributing and maintaining system robustness.
+- **[Agent Development Guide](AGENTS.md)**: Repository map, collaboration rules, and change-to-test guidance for agents and human contributors.
+- **[Testing Guide](tests/README.md)**: Unit, adversarial, and integration test categories.
+- **[Evaluation System](docs/EVALUATION_SYSTEM.md)**: Benchmark workflow and evaluation notes, when present in the current worktree.
+- **[Evaluation System Plan](docs/plans/purring-tumbling-cocke.md)**: Design plan for the extensible evaluation module, LLM-as-Judge scoring, datasets, and reporting.
 
 ### 🛠️ Technical Design
-- **[Project Overview](docs/design/PROJECT_OVERVIEW.md)**: High-level goals and implementation status. ([中文版](docs/design/PROJECT_OVERVIEW_ZH.md))
-- **[Development Strategy](docs/design/STRATEGY.md)**: Vision and phased implementation plan. ([中文版](docs/design/STRATEGY_ZH.md))
-- **[Detailed Architecture](docs/design/architecture.md)**: Mermaid diagrams of internal loops and module interactions.
-- **[Module Documentation](docs/design/modules.md)**: Technical breakdown of core and skill systems. ([中文版](docs/design/modules_zh.md))
+- **[Hook System Design](docs/plans/hook-system-design.md)**: Hook architecture and intervention model.
+- **[Skill System Upgrade Plan](docs/plans/skill_system_upgrade_plan.md)**: Skill architecture and planned improvements.
+- **[General Intervention System](docs/plans/GENERAL_INTERVENTION_SYSTEM.md)**: Broader intervention and control design.
+- **[Self-Healing Strategy](docs/design/SELF_HEALING_STRATEGY_2026.md)**: Recovery and self-healing strategy notes.
+- **[VulRepair Test Plan](docs/plans/vulrepair_test_plan.md)**: Vulnerability repair benchmark plan.
+
+### 📓 Progress & Teaching Notes
+- **[Hook System Implementation](docs/progress/HOOK_SYSTEM_IMPLEMENTATION.md)** and **[Hook System Test Report](docs/progress/HOOK_SYSTEM_TEST_REPORT.md)**: implementation history and validation notes.
+- **[Hybrid Taint Analysis](docs/progress/HYBRID_TAINT_ANALYSIS.md)**: static-analysis integration notes.
+- **[Teaching Notes](docs/teaching/)**: explanatory writeups on FSM workflow, sandboxing, dynamic skills, prompt construction, and benchmarks.
 
 ## 🚦 Getting Started
 1. **Configure Environment**: Copy `.env.example` to `.env` and fill in your LLM API credentials.
